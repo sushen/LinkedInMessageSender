@@ -67,6 +67,9 @@ for i in range(pages):
     aux_count = 0
     for p in range(len(people)):
 
+        people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
+        people = people[1:]
+
         driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
         time.sleep(1)
@@ -78,7 +81,6 @@ for i in range(pages):
         aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
 
         for m in range(len(aux)):
-
 
             # Change to "connect"
             if "Conectar" in aux[m].text:

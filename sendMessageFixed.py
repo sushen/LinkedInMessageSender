@@ -99,8 +99,11 @@ for i in range(pages):
 
                 try:
 
-                    driver.find_element_by_class_name("compose-form__subject-field").send_keys(random.choice(subjects))
-                    time.sleep(1)
+                    try:
+                        driver.find_element_by_class_name("compose-form__subject-field").send_keys(random.choice(subjects))
+                        time.sleep(1)
+                    except:
+                        pass
 
                     driver.find_element_by_class_name("compose-form__message-field").send_keys(random.choice(messages))
                     time.sleep(2)
