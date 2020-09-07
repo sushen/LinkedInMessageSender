@@ -67,7 +67,11 @@ for i in range(pages):
     people = people[1:]
 
     aux_count = 0
+    
     for p in range(len(people)):
+
+        people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
+        people = people[1:]
 
         driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
@@ -93,7 +97,7 @@ for i in range(pages):
 
                 break
 
-            time.sleep(4)
+            time.sleep(2)
 
         driver.find_element_by_id("content-main").click()
 

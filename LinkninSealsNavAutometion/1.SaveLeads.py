@@ -109,6 +109,8 @@ for i in range(pages):
                                 break
 
                         time.sleep(1)
+                        
+                    driver.find_element_by_id("content-main").click()
 
 
         except Exception as e:
