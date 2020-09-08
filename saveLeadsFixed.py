@@ -5,7 +5,7 @@
 from selenium import webdriver
 import time
 from selenium.webdriver.common.action_chains import ActionChains
-
+import os
 
 
 options = webdriver.ChromeOptions()
@@ -109,7 +109,7 @@ for i in range(pages):
                             except Exception as e:
                                 break
 
-                        time.sleep(1)
+                        time.sleep(2)
 
                     driver.find_element_by_id("content-main").click()
 

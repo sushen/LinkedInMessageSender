@@ -100,8 +100,12 @@ for i in range(pages):
 
                 try:
 
-                    driver.find_element_by_class_name("compose-form__subject-field").send_keys(random.choice(subjects))
-                    time.sleep(1)
+                    try:
+                        driver.find_element_by_class_name("compose-form__subject-field").send_keys(random.choice(subjects))
+                        time.sleep(1)
+                    except:
+                        pass
+
 
                     driver.find_element_by_class_name("compose-form__message-field").send_keys(random.choice(messages))
                     time.sleep(2)
@@ -110,6 +114,13 @@ for i in range(pages):
 
                     main_aux = driver.find_element_by_class_name("pr3")
                     main_aux.find_element_by_class_name("ml4").click()
+
+                    time.sleep(1)
+
+                    try:
+                        driver.find_element_by_class_name("message-overlay").find_element_by_tag_name("header").find_elements_by_tag_name("button")[-1].click()
+                    except:
+                        pass
 
                     time.sleep(3)
                     break
