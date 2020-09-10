@@ -18,7 +18,7 @@ message_to_connect = [
     "মেন্টরের মত আপনার পরামর্শ চাই ।"
 ]
 
-
+email = "email@user.com"
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
@@ -92,6 +92,10 @@ for i in range(pages):
 
                 driver.find_element_by_id("connect-cta-form__invitation").send_keys(random.choice(message_to_connect))
                 time.sleep(2)
+
+
+                driver.find_element_by_id("connect-cta-form__email").send_keys(email)
+                time.sleep(1)
 
                 driver.find_element_by_class_name("connect-cta-form__send").click()
 

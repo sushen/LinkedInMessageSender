@@ -13,8 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome("chromedriver.exe",
-                          chrome_options=options)
+driver = webdriver.Chrome("chromedriver.exe",chrome_options=options)
 driver.implicitly_wait(5)  # seconds
 
 # What will be searched
@@ -66,7 +65,8 @@ for i in range(pages):
 
     while p < len(people):
 
-
+        is_pending = False
+        is_connect = False
 
         people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
         people = people[1:]
@@ -84,28 +84,62 @@ for i in range(pages):
 
         aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
 
-        do_anything = True
 
-        #List from where you wanna remove users
+        # TO CHANGE
+        #---------------------------------------------------------------------------------
+
+        # List from where you wanna remove users - MAIN LIST
         list_to_remove = "Lista de leads de Pedro"
 
 
+
+        #IS PENDING
+        #--------------------------------------
+
         #List to add removed users
-        list_to_add = "Shushen"
+        list_to_add = "List to users that have pending on it"
+
+        #-------------------------------------------
+
+
+        # IS CONNECT
+        #-------------------------------------------
+        message_to_connect = [
+            "আপনার সাথে যোগাযোগ করতে চাই ।",
+            "আপনার এপয়েন্টমেন্ট চাই। বিষয় ইনভেষ্টমেন্ট",
+            "মেন্টরের মত আপনার পরামর্শ চাই ।"
+        ]
+
+        email = "user@gmail.com"
+        #-------------------------------------------
+
+
+        #NO CONNECT AND NO PENDING
+        #------------------------------------------
+        list_to = "Name of the list that the users dont have pending or connect"
+
+        #-------------------------------------------------------------------------------------
+
+        for m in range(len(aux)):
+            # No 3 : Change
+            # Change to "Pending"
+            if "Pending" in aux[m].text:
+                is_pending = True
+                break
 
         for m in range(len(aux)):
             # No 3 : Change
             # Change to "Connect"
-            if "Pending" in aux[m].text:
-                do_anything = True
+            if "Connect" in aux[m].text:
+                is_connect = True
                 break
 
 
-        if do_anything:
+        if is_pending:
             for m in range(len(aux)):
                 # No 3 : Change
                 # Change to "Add to another list"
-                if "Adicionar a outra lista" in aux[m].text:
+                if "Add to another list" in aux[m].text:
                     aux[m].click()
                     time.sleep(3)
 
@@ -133,6 +167,62 @@ for i in range(pages):
                     driver.find_element_by_class_name("edit-entity-lists-modal__save-btn").click()
                     p -= 1
                     break
+
+
+        if is_connect:
+            for m in range(len(aux)):
+                # No 3 : Change
+                # Change to "Connect"
+                if "Connect" in aux[m].text:
+                    aux[m].click()
+                    time.sleep(1)
+
+                    driver.find_element_by_id("connect-cta-form__invitation").send_keys(random.choice(message_to_connect))
+                    time.sleep(1)
+
+                    driver.find_element_by_id("connect-cta-form__email").send_keys(email)
+                    time.sleep(1)
+
+                    driver.find_element_by_class_name("connect-cta-form__send").click()
+
+                    break
+
+                time.sleep(1)
+
+
+        if not is_connect and not is_pending:
+            for m in range(len(aux)):
+                # No 3 : Change
+                # Change to "Add to another list"
+                if "Add to another list" in aux[m].text:
+                    aux[m].click()
+                    time.sleep(3)
+
+
+                    cont = driver.find_element_by_class_name("entity-lists-ta__ta-container")
+
+                    btns = cont.find_elements_by_tag_name("button")
+
+                    #Remove from list
+                    for b in btns:
+                        if list_to_remove in b.text:
+                            b.click()
+
+                    time.sleep(2)
+                    mn = driver.find_element_by_class_name("entity-lists-ta__unselected-menu")
+                    aux_btns = mn.find_elements_by_tag_name("button")
+
+                    for xua in aux_btns:
+                        if list_to in xua.text:
+                            xua.click()
+
+
+
+                    time.sleep(1)
+                    driver.find_element_by_class_name("edit-entity-lists-modal__save-btn").click()
+                    p -= 1
+                    break
+
 
         driver.find_element_by_id("content-main").click()
         time.sleep(2)
