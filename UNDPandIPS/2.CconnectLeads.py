@@ -13,12 +13,12 @@ from selenium.webdriver.common.action_chains import ActionChains
 #No 1 : Change
 #Message to send when connecting
 message_to_connect = [
-    "আপনার সাথে যোগাযোগ করতে চাই ।",
-    "আপনার এপয়েন্টমেন্ট চাই। বিষয় ইনভেষ্টমেন্ট",
-    "মেন্টরের মত আপনার পরামর্শ চাই ।"
+    "Hello Sir, \nI am serving International Organization for more than three years.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade.",
+    "Hello Sir, \nI am working with UNDP base organization for more than three years.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade.",
+    "Hello Sir, \nI am serving International Diplomate  for more than three years.my office is in Gulshan 2 near the Unicef hartal office.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade."
 ]
 
-email = "sushenbiswasaga@gmail.com"
+#email = "sushenbiswasaga@gmail.com"
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
@@ -49,7 +49,7 @@ time.sleep(waiting_for_page)
 
 #No 2 : Change
 # #Replace this with the link of your list
-url = "https://www.linkedin.com/sales/lists/people/6709626336727703552?sortCriteria=CREATED_TIME"
+url = "https://www.linkedin.com/sales/lists/people/6709634433944813568?sortCriteria=CREATED_TIME"
 
 driver.get(url)
 time.sleep(waiting_for_page)
@@ -94,8 +94,8 @@ for i in range(pages):
                 time.sleep(2)
 
 
-                driver.find_element_by_id("connect-cta-form__email").send_keys(email)
-                time.sleep(1)
+                # driver.find_element_by_id("connect-cta-form__email").send_keys(email)
+                # time.sleep(1)
 
                 driver.find_element_by_class_name("connect-cta-form__send").click()
 

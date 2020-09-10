@@ -13,7 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome("chromedriver.exe",chrome_options=options)
+driver = webdriver.Chrome("D:\Project\Python Tutorials Repo\LinkedInMessageSender\chromedriver.exe",chrome_options=options)
 driver.implicitly_wait(5)  # seconds
 
 # What will be searched
@@ -43,7 +43,7 @@ time.sleep(waiting_for_page)
 
 # No 2 : Change
 # #Replace this with the link of your list
-url = "https://www.linkedin.com/sales/lists/people/6700717890691194880?sortCriteria=CREATED_TIME"
+url = "https://www.linkedin.com/sales/lists/people/6709626336727703552?sortCriteria=CREATED_TIME"
 
 driver.get(url)
 time.sleep(waiting_for_page)
@@ -89,7 +89,7 @@ for i in range(pages):
         #---------------------------------------------------------------------------------
 
         # List from where you wanna remove users - MAIN LIST
-        list_to_remove = "Lista de leads de Pedro"
+        list_to_remove = "Garment Bangladesh"
 
 
 
@@ -97,7 +97,7 @@ for i in range(pages):
         #--------------------------------------
 
         #List to add removed users
-        list_to_add = "List to users that have pending on it"
+        list_to_add = "Pending Connection on Garment Businessman"
 
         #-------------------------------------------
 
@@ -110,13 +110,13 @@ for i in range(pages):
             "মেন্টরের মত আপনার পরামর্শ চাই ।"
         ]
 
-        email = "user@gmail.com"
+        email = "sushenbiswasaga@gmail.com"
         #-------------------------------------------
 
 
         #NO CONNECT AND NO PENDING
         #------------------------------------------
-        list_to = "Name of the list that the users dont have pending or connect"
+        list_to = "Garment Businessman I Connect"
 
         #-------------------------------------------------------------------------------------
 

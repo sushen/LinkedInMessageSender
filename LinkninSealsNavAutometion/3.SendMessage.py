@@ -60,7 +60,7 @@ time.sleep(waiting_for_page)
 
 #No 3 : Change
 #Replace this with the link of your list
-url = "https://www.linkedin.com/sales/lists/people/6708206698034802688?sortCriteria=CREATED_TIME"
+url = "https://www.linkedin.com/sales/lists/people/6709626336727703552?sortCriteria=CREATED_TIME"
 
 driver.get(url)
 time.sleep(waiting_for_page)
@@ -113,6 +113,13 @@ for i in range(pages):
 
                     main_aux = driver.find_element_by_class_name("pr3")
                     main_aux.find_element_by_class_name("ml4").click()
+
+                    time.sleep(1)
+
+                    try:
+                        driver.find_element_by_class_name("message-overlay").find_element_by_tag_name("header").find_elements_by_tag_name("button")[-1].click()
+                    except:
+                        pass
 
                     time.sleep(3)
                     break

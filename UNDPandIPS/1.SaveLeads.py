@@ -1,5 +1,7 @@
 #  Copyright (c) 2020.
 #  Version : 1.0.1
+#  !/usr/bin/env python
+#   coding: utf-8
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -19,7 +21,7 @@ driver.implicitly_wait(25)  # seconds
 
 #No 1 : Change
 #What will be searched
-search_parameter = "Garment"
+search_parameter = "undp"
 
 #Time waiting for page
 waiting_for_page = 5
@@ -95,7 +97,7 @@ for i in range(pages):
                     for ls in lists:
                         # No 3 : Change
                         # You have to change this name for your desired list
-                        if "Garment Bangladesh" in ls.text:
+                        if "UNDP" in ls.text:
 
                             ls.click()
 
