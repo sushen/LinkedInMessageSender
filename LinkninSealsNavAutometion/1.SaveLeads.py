@@ -93,17 +93,23 @@ for i in range(pages):
                     lists = people.find_element_by_class_name("save-to-list-dropdown").find_elements_by_tag_name("li")[2].find_elements_by_tag_name("li")
 
                     for ls in lists:
+
+                        nm = ""
+
+                        try:
+                            nm = ls.text.split("\n")[0]
+                        except:
+                            nm = ls.text
                         # No 3 : Change
                         # You have to change this name for your desired list
-                        if "Garment Bangladesh" in ls.text:
+                        if "Garment Bangladesh" == nm:
 
                             ls.click()
 
-                            time.sleep(1)
+                            time.sleep(2)
 
                             try:
-                                bs = driver.find_element_by_class_name("lead-cta-form__save-without-company")
-                                bs.click()
+                                driver.find_element_by_class_name("lead-cta-form__save-without-company").click()
                                 break
                             except Exception as e:
                                 break
