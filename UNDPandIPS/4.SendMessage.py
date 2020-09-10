@@ -11,14 +11,22 @@ import os
 from selenium.webdriver.common.action_chains import ActionChains
 
 #No 1 : Change
-#Message to send when connecting
-message_to_connect = [
+#Change the messages as you wish, one of them will be randomly picked
+subjects = [
+    "I have one idea for sale.",
+    "I need your opinion about one idea.",
+    "I need your mentoring in this field. ",
+    "I need your partnership in this reason. "
+]
+
+#No 2 : Change
+#Change the messages as you wish, one of them will be randomly picked
+messages = [
     "Hello Sir, \nI am serving International Organization for more than three years.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade.",
     "Hello Sir, \nI am working with UNDP base organization for more than three years.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade.",
     "Hello Sir, \nI am serving International Diplomate  for more than three years.my office is in Gulshan 2 near the Unicef hartal office.\nOur company work in Unicef Somalia (Nairobi based) as a BI(Business Intelligence) Consultant. If you accept my invitation I will be a very glade."
 ]
 
-email = "sushenbiswasaga@gmail.com"
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
@@ -34,6 +42,8 @@ waiting_for_page = 10
 
 driver.get("https://www.linkedin.com/")
 
+# Login
+
 # I use environment veriable base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
 username = os.environ.get('my_Linkdin_username')
 password = os.environ.get('my_Linkdin_password')
@@ -46,10 +56,9 @@ time.sleep(1)
 driver.find_element_by_class_name("sign-in-form__submit-button").click()
 time.sleep(waiting_for_page)
 
-
-#No 2 : Change
-# #Replace this with the link of your list
-url = "https://www.linkedin.com/sales/lists/people/6709634433944813568?sortCriteria=CREATED_TIME"
+#No 3 : Change
+#Replace this with the link of your list
+url = "https://www.linkedin.com/sales/lists/people/6709657848672071680?sortCriteria=CREATED_TIME"
 
 driver.get(url)
 time.sleep(waiting_for_page)
@@ -67,11 +76,7 @@ for i in range(pages):
     people = people[1:]
 
     aux_count = 0
-    
     for p in range(len(people)):
-
-        people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
-        people = people[1:]
 
         driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
@@ -84,26 +89,44 @@ for i in range(pages):
         aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
 
         for m in range(len(aux)):
-            # No 3 : Change
-            # Change to "Connect"
-            if "Connect" in aux[m].text:
-                aux[m].click()
-                time.sleep(1)
+            # No 4 : Change to "Message"
+            if "Message" in aux[m].text:
 
-                driver.find_element_by_id("connect-cta-form__invitation").send_keys(random.choice(message_to_connect))
+                aux[m].click()
+
                 time.sleep(2)
 
                 try:
-                    driver.find_element_by_id("connect-cta-form__email").send_keys(email)
+
+                    try:
+                        driver.find_element_by_class_name("compose-form__subject-field").send_keys(random.choice(subjects))
+                        time.sleep(1)
+                    except:
+                        pass
+
+                    driver.find_element_by_class_name("compose-form__message-field").send_keys(random.choice(messages))
+                    time.sleep(2)
+
+                    # Click send
+
+                    main_aux = driver.find_element_by_class_name("pr3")
+                    main_aux.find_element_by_class_name("ml4").click()
+
                     time.sleep(1)
+
+                    try:
+                        driver.find_element_by_class_name("message-overlay").find_element_by_tag_name("header").find_elements_by_tag_name("button")[-1].click()
+                    except:
+                        pass
+
+                    time.sleep(3)
+                    break
                 except:
-                    pass
+                    driver.find_element_by_class_name("message-overlay").find_element_by_tag_name("header").find_elements_by_tag_name("button")[-1].click()
+                    time.sleep(3)
+                    break
 
-                driver.find_element_by_class_name("connect-cta-form__send").click()
-
-                break
-
-            time.sleep(2)
+        time.sleep(1)
 
         driver.find_element_by_id("content-main").click()
 
