@@ -83,6 +83,8 @@ for i in range(pages):
         time.sleep(2)
 
         aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
+        aux2 = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("div")
+
 
 
         # TO CHANGE
@@ -120,17 +122,17 @@ for i in range(pages):
 
         #-------------------------------------------------------------------------------------
 
-        for m in range(len(aux)):
+        for m in range(len(aux2)):
             # No 3 : Change
             # Change to "Pending"
-            if "Pending" in aux[m].text:
+            if "Pending" in aux2[m].text:
                 is_pending = True
                 break
 
-        for m in range(len(aux)):
+        for m in range(len(aux2)):
             # No 3 : Change
             # Change to "Connect"
-            if "Connect" in aux[m].text:
+            if "Connect" in aux2[m].text:
                 is_connect = True
                 break
 
