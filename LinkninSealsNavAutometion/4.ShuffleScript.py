@@ -150,15 +150,28 @@ for i in range(pages):
 
                     #Remove from list
                     for b in btns:
-                        if list_to_remove in b.text:
+                        nm = ""
+                        try:
+                            nm = b.text.split("\n")[0]
+                        except:
+                            nm = b.text
+
+                        if list_to_remove == nm:
                             b.click()
+                            
 
                     time.sleep(2)
                     mn = driver.find_element_by_class_name("entity-lists-ta__unselected-menu")
                     aux_btns = mn.find_elements_by_tag_name("button")
 
-                    for xua in aux_btns:
-                        if list_to_add in xua.text:
+                    for xua in aux_btns:    
+                        nm = ""
+                        try:
+                            nm = xua.text.split(" (")[0]
+                        except:
+                            nm = xua.text
+
+                        if list_to_add == nm:
                             xua.click()
 
 
@@ -180,8 +193,12 @@ for i in range(pages):
                     driver.find_element_by_id("connect-cta-form__invitation").send_keys(random.choice(message_to_connect))
                     time.sleep(1)
 
-                    driver.find_element_by_id("connect-cta-form__email").send_keys(email)
-                    time.sleep(1)
+
+                    try:
+                        driver.find_element_by_id("connect-cta-form__email").send_keys(email)
+                        time.sleep(1)
+                    except:
+                        pass
 
                     driver.find_element_by_class_name("connect-cta-form__send").click()
 
@@ -205,7 +222,13 @@ for i in range(pages):
 
                     #Remove from list
                     for b in btns:
-                        if list_to_remove in b.text:
+
+                        nm = ""
+                        try:
+                            nm = b.text.split("\n")[0]
+                        except:
+                            nm = b.text
+                        if list_to_remove == nm:
                             b.click()
 
                     time.sleep(2)
@@ -213,7 +236,12 @@ for i in range(pages):
                     aux_btns = mn.find_elements_by_tag_name("button")
 
                     for xua in aux_btns:
-                        if list_to in xua.text:
+                        nm = ""
+                        try:
+                            nm = xua.text.split(" (")[0]
+                        except:
+                            nm = xua.text
+                        if list_to == nm:
                             xua.click()
 
 

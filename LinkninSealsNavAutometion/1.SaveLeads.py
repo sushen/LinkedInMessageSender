@@ -72,11 +72,11 @@ for i in range(pages):
     # Go trough the page users and check if they can be messaged
     all_people_in_page = driver.find_elements_by_class_name("pv5")
 
-    for people in all_people_in_page:
-        actions = ActionChains(driver)
-        actions.move_to_element(people).perform()
+    aux_count = 0
 
-        time.sleep(time_per_user)
+    for people in all_people_in_page:
+
+        driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
         buttons = people.find_elements_by_tag_name("button")
 
@@ -93,29 +93,39 @@ for i in range(pages):
                     lists = people.find_element_by_class_name("save-to-list-dropdown").find_elements_by_tag_name("li")[2].find_elements_by_tag_name("li")
 
                     for ls in lists:
+
+                        nm = ""
+
+                        try:
+                            nm = ls.text.split("\n")[0]
+                        except:
+                            nm = ls.text
                         # No 3 : Change
                         # You have to change this name for your desired list
-                        if "Garment Bangladesh" in ls.text:
+                        if "Garment Bangladesh" == nm:
 
                             ls.click()
 
-                            time.sleep(1)
+                            time.sleep(2)
 
                             try:
-                                bs = driver.find_element_by_class_name("lead-cta-form__save-without-company")
-                                bs.click()
+                                driver.find_element_by_class_name("lead-cta-form__save-without-company").click()
                                 break
                             except Exception as e:
                                 break
 
                         time.sleep(1)
                         
-                    driver.find_element_by_id("content-main").click()
+
 
 
         except Exception as e:
             print(e)
             pass
+
+        time.sleep(time_per_user)
+        aux_count += 80
+
 
 
     driver.find_element_by_class_name("search-results__pagination-next-button").click()
