@@ -184,7 +184,7 @@ for i in range(pages):
                     break
 
 
-        if is_connect:
+        elif is_connect:
             for m in range(len(aux)):
                 # No 3 : Change
                 # Change to "Connect"
@@ -209,7 +209,7 @@ for i in range(pages):
                 time.sleep(1)
 
 
-        if not is_connect and not is_pending:
+        else:
             for m in range(len(aux)):
                 # No 3 : Change
                 # Change to "Add to another list"
