@@ -129,6 +129,30 @@ for i in range(pages):
                     time.sleep(3)
                     break
 
+
+        time.sleep(2)
+
+        people[p].find_elements_by_tag_name("button")[-1].click()
+
+        time.sleep(2)
+
+        aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
+
+        for m in range(len(aux)):
+
+            # Change to "Send Message"
+            if "Remove from list" in aux[m].text:
+
+                aux[m].click()
+
+                time.sleep(2)
+
+                driver.find_element_by_class_name("simple-form").find_elements_by_tag_name("label")[1].click()
+                time.sleep(2)
+                driver.find_element_by_class_name("remove-entity-from-list__delete-button").click()
+                time.sleep(2)
+                break
+
         time.sleep(1)
 
         driver.find_element_by_id("content-main").click()
