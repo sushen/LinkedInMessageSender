@@ -76,11 +76,12 @@ for i in range(pages):
 
     people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
     people = people[1:]
+    n_people = len(n_people)
 
+    p = 0
     aux_count = 0
-    for p in range(len(people)):
+    while n_people > 0:
 
-        driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
         time.sleep(1)
 
@@ -157,12 +158,10 @@ for i in range(pages):
 
         driver.find_element_by_id("content-main").click()
 
-        aux_count += 80
+        people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
+        people = people[1:]
+        n_people = len(n_people)
 
-    try:
-        driver.find_element_by_class_name("search-results__pagination-next-button").click()
-    except:
-        pass
-    time.sleep(10)
+  
 
 
