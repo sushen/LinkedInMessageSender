@@ -76,11 +76,12 @@ for i in range(pages):
 
     people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
     people = people[1:]
+    n_people = len(n_people)
 
+    p = 0
     aux_count = 0
-    for p in range(len(people)):
+    while n_people > 0:
 
-        driver.execute_script("window.scrollTo(0, {})".format(aux_count))
 
         time.sleep(1)
 
@@ -128,16 +129,38 @@ for i in range(pages):
                     time.sleep(3)
                     break
 
+
+        time.sleep(2)
+
+        people[p].find_elements_by_tag_name("button")[-1].click()
+
+        time.sleep(2)
+
+        aux = people[p].find_element_by_class_name("artdeco-dropdown__content-inner").find_elements_by_tag_name("li")
+
+        for m in range(len(aux)):
+
+            # Change to "Send Message"
+            if "Remove from list" in aux[m].text:
+
+                aux[m].click()
+
+                time.sleep(2)
+
+                driver.find_element_by_class_name("simple-form").find_elements_by_tag_name("label")[1].click()
+                time.sleep(2)
+                driver.find_element_by_class_name("remove-entity-from-list__delete-button").click()
+                time.sleep(2)
+                break
+
         time.sleep(1)
 
         driver.find_element_by_id("content-main").click()
 
-        aux_count += 80
+        people = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
+        people = people[1:]
+        n_people = len(n_people)
 
-    try:
-        driver.find_element_by_class_name("search-results__pagination-next-button").click()
-    except:
-        pass
-    time.sleep(10)
+  
 
 

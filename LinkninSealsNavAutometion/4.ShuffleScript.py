@@ -185,28 +185,7 @@ for i in range(pages):
 
 
         elif is_connect:
-            for m in range(len(aux)):
-                # No 3 : Change
-                # Change to "Connect"
-                if "Connect" in aux[m].text:
-                    aux[m].click()
-                    time.sleep(1)
-
-                    driver.find_element_by_id("connect-cta-form__invitation").send_keys(random.choice(message_to_connect))
-                    time.sleep(1)
-
-
-                    try:
-                        driver.find_element_by_id("connect-cta-form__email").send_keys(email)
-                        time.sleep(1)
-                    except:
-                        pass
-
-                    driver.find_element_by_class_name("connect-cta-form__send").click()
-
-                    break
-
-                time.sleep(1)
+            pass
 
 
         else:
